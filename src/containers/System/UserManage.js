@@ -3,25 +3,50 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss'
 import { userService } from '../../services/userService';
+import ModalUser from './ModalUser';
 class UserManage extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            arrUser: []
+            arrUser: [],
+            isOpenModalUser: false
         }
     }
 
     async componentDidMount() {
+        await this.getAllUsersFromReact()
+    }
+    getAllUsersFromReact = async () => {
         const response = await userService.getAllUser('All')
-        console.log('🚀 ~ UserManage ~ componentDidMount ~ response:', response)
         if (response && response.status === 'OK') {
             this.setState({
                 arrUser: response.users
             })
         }
-        console.log(this.state.arrUser);
-
+    }
+    handleAddUser = () => {
+        this.setState({
+            isOpenModalUser: true
+        })
+    }
+    toggleUserModal = () => {
+        this.setState({
+            isOpenModalUser: !this.state.isOpenModalUser
+        })
+    }
+    createNewUser = async (data) => {
+        try {
+            const response = await userService.createNewUserService(data)
+            if (response && response.status === 'OK') {
+                await this.getAllUsersFromReact()
+                this.setState({
+                    isOpenModalUser: false
+                })
+            }
+        } catch (error) {
+            throw error
+        }
     }
     /** Life cycle
      * Run component:
@@ -33,29 +58,35 @@ class UserManage extends Component {
 
     render() {
         return (
-            <div className="user-container">
+            <div className="users-container">
+                <ModalUser createNewUser={this.createNewUser} isOpen={this.state.isOpenModalUser} toggleFormParent={this.toggleUserModal} />
                 <div className='title'>Manage users with Eric</div>
+                <div className='mx-1'>
+                    <button className='btn btn-primary px-3' onClick={() => this.handleAddUser()}><i className="fa-solid fa-user-plus"></i> Add new users</button>
+                </div>
                 <div className="users-table">
                     <table id="customers">
-                        <tr>
-                            <th>Email</th>
-                            <th>Họ</th>
-                            <th>Tên</th>
-                            <th>Địa chỉ</th>
-                            <th>Hành động</th>
-                        </tr>
-                        {this.state.arrUser?.map(user => (
-                            <tr key={user.id}> {/* key cần có giá trị duy nhất */}
-                                <td>{user.email}</td>
-                                <td>{user.firstName}</td>
-                                <td>{user.lastName}</td>
-                                <td>{user.address}</td>
-                                <td>
-                                    <button className='btn-edit'><i className="fa-solid fa-pen-to-square"></i></button>
-                                    <button className='btn-delete'><i className="fa-solid fa-eraser"></i></button>
-                                </td>
+                        <tbody>
+                            <tr>
+                                <th>Email</th>
+                                <th>Họ</th>
+                                <th>Tên</th>
+                                <th>Địa chỉ</th>
+                                <th>Hành động</th>
                             </tr>
-                        ))}
+                            {this.state.arrUser?.map(user => (
+                                <tr key={user.id}>
+                                    <td>{user.email}</td>
+                                    <td>{user.firstName}</td>
+                                    <td>{user.lastName}</td>
+                                    <td>{user.address}</td>
+                                    <td>
+                                        <button className='btn-edit'><i className="fa-solid fa-pen-to-square"></i></button>
+                                        <button className='btn-delete'><i className="fa-solid fa-eraser"></i></button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -63,7 +94,6 @@ class UserManage extends Component {
     }
 
 }
-
 const mapStateToProps = state => {
     return {
     };

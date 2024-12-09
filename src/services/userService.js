@@ -9,8 +9,12 @@ const getAllUser = async (id) => {
 const createNewUserService = async (data) => {
     return (await axios.post('/api/sign-up', data)).data
 }
+const deleteUserService = async (userId) => {
+    return (await axios.delete('/api/delete-user', { data: { userId } })).data;
+}
 export const userService = {
     handleLogin,
     createNewUserService,
+    deleteUserService,
     getAllUser
 }

@@ -12,9 +12,13 @@ const createNewUserService = async (data) => {
 const deleteUserService = async (userId) => {
     return (await axios.delete('/api/delete-user', { data: { userId } })).data;
 }
+const editUserService = async (data) => {
+    return (await axios.put('/api/edit-user', data)).data;
+}
 export const userService = {
     handleLogin,
     createNewUserService,
     deleteUserService,
-    getAllUser
+    getAllUser,
+    editUserService
 }

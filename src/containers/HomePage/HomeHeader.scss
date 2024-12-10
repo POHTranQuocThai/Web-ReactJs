@@ -8,6 +8,12 @@
         display: flex;
         margin-top: 10px;
         .left-content{
+            i{
+                cursor: pointer;
+                &:hover{
+                    color: rgb(12, 201, 201);
+                }
+            }
             width: 25%;
             display: flex;
             align-items: center;
@@ -16,7 +22,7 @@
                 background: url('/assets/images/bookingcare.png') center center no-repeat;
                 height: 100%; /* Hoặc giá trị cụ thể */
                 width: 100px;
-                background-size: 64%; /* Hình ảnh chiếm 30% kích thước phần tử */
+                background-size: 64%; /* Hình ảnh chiếm 30% kích thước phần tử */            
             }
             
             i{
@@ -29,8 +35,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             .child-content{
+                b{
+                    &:hover{
+                        color: rgb(12, 201, 201);
+                    }
+                    cursor: pointer;
+                }
                 .sub-title{
                     font-weight: 400;
                     font-size: 12px;
@@ -56,14 +67,24 @@
             }
             .language-vi{
                 cursor: pointer;
+                opacity: .2;
                 &.active{
+                    opacity: 1;
                     color: rgb(243, 199, 7);
                 }
+                &:hover{
+                    opacity: .8;
+                }
             }
-            .language-vn{
+            .language-en{
                 cursor: pointer;
+                opacity: 0.2;
                 &.active{
+                    opacity: 1;
                     color: blue;
+                }
+                &:hover{
+                    opacity: .8;
                 }
             }
         }
@@ -93,7 +114,7 @@
             font-size: 30px;
             text-shadow: 2px 2px 5px #333;
             color: white;
-            margin: 30px 0 50px 0;
+            margin: 30px 0 60px 0;
         }
         .search{
             display: flex;

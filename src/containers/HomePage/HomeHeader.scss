@@ -1,0 +1,178 @@
+.home-header-container{
+    height: 60px;
+    width: 100%;  
+    padding: 0 20px; 
+    .home-header-content{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        margin-top: 10px;
+        .left-content{
+            width: 25%;
+            display: flex;
+            align-items: center;
+            .header-logo {
+                margin-top: 2px;
+                background: url('/assets/images/bookingcare.png') center center no-repeat;
+                height: 100%; /* Hoặc giá trị cụ thể */
+                width: 100px;
+                background-size: 64%; /* Hình ảnh chiếm 30% kích thước phần tử */
+            }
+            
+            i{
+                font-size: 25px;
+                color: grey;
+            }
+        }
+        .center-content{
+            width: 55%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .child-content{
+                .sub-title{
+                    font-weight: 400;
+                    font-size: 12px;
+                }
+            }
+        }
+        .right-content{
+            width: 25%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 20px;
+            .support{
+                i{
+                    color: rgb(17, 214, 214);
+                    font-size: 17px;
+                }
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                cursor: pointer;
+
+            }
+            .language-vi{
+                cursor: pointer;
+                &.active{
+                    color: rgb(243, 199, 7);
+                }
+            }
+            .language-vn{
+                cursor: pointer;
+                &.active{
+                    color: blue;
+                }
+            }
+        }
+    } 
+}
+    .home-header-banner{
+        margin-top: 2px;
+        background: url('../../assets/images/banner.jpg') center center no-repeat;
+        height: 600px;
+        width: 100%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        .content-up{ 
+            height: 65%;      
+            .title1{
+            text-align: center;
+            font-size: 30px;
+            text-shadow: 2px 2px 5px #333;
+            color: white;
+            margin: 30px 0 5px 0;
+            font-weight: 600;
+        }
+        .title2{
+            font-weight: 600;
+            text-align: center;
+            font-size: 30px;
+            text-shadow: 2px 2px 5px #333;
+            color: white;
+            margin: 30px 0 50px 0;
+        }
+        .search{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 20px;
+            margin: 0 auto;
+            width: 500px;
+            border-radius: 30px;
+            background-color: rgba(185, 207, 248, 0.663);
+            input{
+                width: 100%;
+                background-color: transparent;
+                border: none;
+                outline: none;
+                color: #fff;
+
+            }
+            i{
+                margin: 0 5px;
+                font-size: 40px;
+                color: rgb(161, 255, 255);
+            }
+        }
+        }
+  .content-down{
+    height: 35%;
+    display: flex;
+    align-items: center;
+    .options{
+        display: flex;
+        gap: 100px;
+        margin: 0 auto;
+        justify-content: center;
+        padding: 0 10px;
+        
+        .option-child{
+            width: 100px;
+            text-align: center;
+            .icon-child{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: #fff;
+                margin: 0 auto;
+                padding: 10px;
+                margin-bottom: 10px;
+                i{
+                    color: rgb(14, 211, 211);
+                    font-size: 25px;
+                }
+                // .fa-hospital{
+                //     font-size: 25px;
+                // }
+                .fa-headset{
+                    font-size: 28px;
+                }
+                .fa-hospital-user{
+                    font-size: 28px;
+                }
+                .fa-vials{
+                    font-size: 28px;
+                }
+                .fa-head-side-virus{
+                    font-size: 28px;
+                }
+                .fa-tooth{
+                    font-size: 28px;
+                }
+            }
+            .text-child{
+                font-weight: 600;
+                font-size: 15px;
+                cursor: pointer;
+                &:hover{
+                    color: rgb(12, 201, 201);
+                }
+            }
+        }
+    }
+  }
+}

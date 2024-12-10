@@ -1,4 +1,25 @@
 {
+    "homeheader":{
+        "speciality":"Medical specialty",
+        "searchdoctor":"Find a doctor by specialty",
+        "health-facility": "Health facility",
+        "select-room": "Select hospital or clinic",
+        "doctor": "Doctor",
+        "select-doctor": "Select a skilled doctor",
+        "fee": "Health checkup package",
+        "check-health": "General health checkup",
+        "support": "Support"
+    },
+    "banner": {
+    "title1": "Healthcare platform",
+    "title2": "Comprehensive health care",
+    "child1": "Specialist consultation",
+    "child2": "Remote consultation",
+    "child3": "General checkup",
+    "child4": "Medical testing",
+    "child5": "Mental health",
+    "child6": "Dental checkup"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

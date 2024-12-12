@@ -1,0 +1,111 @@
+.slick-prev{
+    left: -20px !important; 
+    z-index: 1000 !important;
+    height: 40px !important;
+    width: 40px !important;
+    background-color:#fff !important;
+    &:hover{
+        background: #eceaea !important;
+    }
+}
+.slick-next::before,
+.slick-prev::before{
+    font-family: 'Montserrat' !important;
+    color: red !important;
+}
+.slick-next{
+    right: -20px !important; 
+    height: 40px !important;
+    width: 40px !important;
+    background-color: #fff !important;
+    &:hover{
+        background: #eceaea !important;
+    }
+}
+.section-share{
+    &.section-specialty{
+        background: #f5f5f5;
+    }
+    &.section-outstanding-doctor{
+        background: #f5f5f5;
+    }
+    .section-body{
+        .section-customize{
+            .bg-image{
+                //background-color: #eee;
+                width: 310px;
+                background-size: cover;
+                height: 150px;
+                border-radius: 20px;
+            }
+            &.section-specialty{
+                background-image: url('../../assets/images/specialty/image.png') center center no-repeat;
+            }
+            &.section-medical-facility{
+                background-image: url('../../assets/images/medicalFacility/image.png') center center no-repeat;
+            }
+            &.section-outstanding-doctor{
+                background-image: url('../../assets/images/outStandingDoctor/image.png') center center no-repeat;
+                height: 120px;
+                width: 120px;
+                border-radius: 50%;
+            }
+            &.section-handbook{
+                background-image: url('../../assets/images/handBook/image.png') center center no-repeat;
+            }
+        }
+        .bg-image{
+            display: block;
+            height: 200px;
+            width: 280px;
+        }
+           
+    }
+}
+.section-share{
+    height: 330px;
+
+    .section-container{
+        margin: 0 100px;
+        display: flex;
+        flex-direction: column;
+        .section-header{
+             height: 60px;
+             margin-bottom: 30px;
+             padding-top: 30px;
+             .title-section{
+                font-size: 22px;
+                font-weight: 600;
+             }
+             .btn-section{
+                float: right;
+                padding: 10px 15px;
+                border: none;
+                outline: none;
+                display: block;
+                background: #eee;
+                &:hover{
+                    background: rgb(200, 200, 28);
+                    color: #fff;
+                }
+             }
+        }
+        
+    }
+    
+}
+
+.section-outstanding-doctor{
+    .outer-bg{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        .section-customize{
+            padding: 5px;
+            .customize-border{
+                border: 1px solid orange;
+                padding: 20px;
+            }
+        }
+    }
+}

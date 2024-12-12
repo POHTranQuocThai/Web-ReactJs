@@ -1,14 +1,13 @@
 .section-specialty{
     height: 330px;
     background: #f5f5f5;
-    border: 1px solid green;
 
-    .specialty-container{
+    .section-container{
         margin: 0 100px;
         display: flex;
         flex-direction: column;
-        .specialty-header{
-            height: 60px;
+        .section-header{
+             height: 60px;
              margin-bottom: 30px;
              padding-top: 30px;
              .title-section{
@@ -28,12 +27,12 @@
                 }
              }
         }
-        .specialty-body{
-            .specialty-customize{
+        .section-body{
+            .section-customize{
                 .bg-image{
                     background: url('../../../assets/images/specialty/image.png') center center no-repeat;
                     background-color: #eee;
-                    width: 278px;
+                    width: 290px;
                     background-size: cover;
                     height: 150px;
                     border-radius: 20px;
@@ -44,30 +43,7 @@
                 height: 200px;
                 width: 280px;
             }
-            .slick-prev{
-                left: -20px !important; 
-                z-index: 1000 !important;
-                height: 40px !important;
-                width: 40px !important;
-                background-color:#fff !important;
-                &:hover{
-                    background: #eceaea !important;
-                }
-            }
-            .slick-next::before,
-            .slick-prev::before{
-                font-family: FontAwesome !important;
-                color: red !important;
-            }
-            .slick-next{
-                right: -20px !important; 
-                height: 40px !important;
-                width: 40px !important;
-                background-color: #fff !important;
-                &:hover{
-                    background: #eceaea !important;
-                }
-            }
+           
           
         }
     }

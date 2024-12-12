@@ -95,7 +95,8 @@ class HomeHeader extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language  //cấu hình chuyển đổi ngôn ngữ
+        language: state.app.language,  //cấu hình chuyển đổi ngôn ngữ
+        userInfo: state.user.userInfo
     };
 };
 

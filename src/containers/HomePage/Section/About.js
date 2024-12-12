@@ -14,7 +14,7 @@ class About extends Component {
                 </div>
                 <div className="section-about-content">
                     <div className="content-left">
-                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/HSOtku1j600" title="2 Hour Beautiful Piano Music for Studying and Sleeping 【BGM】" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>                    </div>
+                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/HSOtku1j600" title="2 Hour Beautiful Piano Music for Studying and Sleeping 【BGM】" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>                    </div>
                     <div className="content-right">
                         <p>Heloo</p>
                     </div>

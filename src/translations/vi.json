@@ -72,7 +72,7 @@
         "male": "Name",
         "female": "Nữ",
         "other":"Khác",
-        "choose": "Chọn"
+        "upload": "Tải ảnh"
     },
     "system": {
         "user-manage": {

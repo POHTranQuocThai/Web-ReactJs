@@ -57,6 +57,24 @@
         }
 
     },
+    "manage-user": {
+    "add": "Add New User",
+    "email": "Email",
+    "password": "Password",
+    "first-name": "First Name",
+    "last-name": "Last Name",
+    "phone": "Phone",
+    "address": "Address",
+    "gender": "Gender",
+    "position": "Position",
+    "role": "Role",
+    "image": "Image",
+    "save": "Save",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "choose": "Choose"
+    },
     "system": {
         "user-manage": {
             "fail-to-load-fouser": "Fail to load system users list",

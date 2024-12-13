@@ -15,10 +15,14 @@ const deleteUserService = async (userId) => {
 const editUserService = async (data) => {
     return (await axios.put('/api/edit-user', data)).data;
 }
+const getAllCodeService = async (dataType) => {
+    return (await axios.get(`/api/allcode?type=${dataType}`)).data;
+}
 export const userService = {
     handleLogin,
     createNewUserService,
     deleteUserService,
     getAllUser,
-    editUserService
+    editUserService,
+    getAllCodeService
 }

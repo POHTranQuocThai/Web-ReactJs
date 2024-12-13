@@ -18,6 +18,8 @@ const editUserService = async (data) => {
 const getAllCodeService = async (dataType) => {
     return (await axios.get(`/api/allcode?type=${dataType}`)).data;
 }
+
+
 export const userService = {
     handleLogin,
     createNewUserService,

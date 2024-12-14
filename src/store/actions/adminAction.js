@@ -1,3 +1,4 @@
+import { toast } from "react-toastify"
 import { userService } from "../../services/userService"
 import actionTypes from "./actionTypes"
 
@@ -72,6 +73,8 @@ export const createNewUser = (data) => {
             const res = await userService.createNewUserService(data);
             if (res && res.status === 'OK') {
                 dispatch(saveUserSuccess())
+                dispatch(fetchAllUsersStart())
+                toast.success(res.message)
             } else {
                 dispatch(saveUserFailded())
             }
@@ -85,4 +88,70 @@ export const saveUserSuccess = () => ({
 })
 export const saveUserFailded = () => ({
     type: actionTypes.CREATE_USER_FAILED
+})
+export const deleteUser = (userId) => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await userService.deleteUserService(userId);
+            if (res && res.status === 'OK') {
+                dispatch(deleteUserSuccess())
+                dispatch(fetchAllUsersStart())
+                toast.success(res.message)
+            } else {
+                dispatch(deleteUserFailded())
+            }
+        } catch (error) {
+            dispatch(deleteUserFailded())
+        }
+    }
+}
+export const deleteUserSuccess = () => ({
+    type: actionTypes.DELETE_USER_SUCCESS
+})
+export const deleteUserFailded = () => ({
+    type: actionTypes.DELETE_USER_FAILED
+})
+export const editUser = (userEdit) => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await userService.editUserService(userEdit);
+            if (res && res.status === 'OK') {
+                dispatch(editUserSuccess())
+                dispatch(fetchAllUsersStart())
+                toast.success(res.message)
+            } else {
+                dispatch(editUserFailded())
+            }
+        } catch (error) {
+            dispatch(editUserFailded())
+        }
+    }
+}
+export const editUserSuccess = () => ({
+    type: actionTypes.EDIT_USER_SUCCESS
+})
+export const editUserFailded = () => ({
+    type: actionTypes.EDIT_USER_FAILED
+})
+
+export const fetchAllUsersStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await userService.getAllUser('All')
+            if (res && res.status === 'OK') {
+                dispatch(fetchAllUsersSuccess(res.users.reverse()))
+            } else {
+                dispatch(fetchAllUsersFailed())
+            }
+        } catch (error) {
+            dispatch(fetchAllUsersFailed())
+        }
+    }
+}
+export const fetchAllUsersSuccess = (allUsers) => ({
+    type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+    data: allUsers
+})
+export const fetchAllUsersFailed = () => ({
+    type: actionTypes.FETCH_ALL_USERS_FAILED
 })

@@ -2,115 +2,67 @@
 import Slider from 'react-slick';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actions from '../../../store/actions'
+import { LANGUAGES } from '../../../utils';
+import { FormattedMessage } from 'react-intl';
 
 
 class OutStandingDoctor extends Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            arrTopDoctors: []
+        }
+    }
+    componentDidMount() {
+        this.props.loadTopDoctors()
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.topDoctors !== this.props.topDoctors) {
+            this.setState({
+                arrTopDoctors: this.props.topDoctors
+            })
+        }
+    }
     render() {
+        let arrTopDoctors = this.state.arrTopDoctors
+        arrTopDoctors = arrTopDoctors.concat(arrTopDoctors).concat(arrTopDoctors).concat(arrTopDoctors).concat(arrTopDoctors)
+        const language = this.props.language
         return (
             <div className='section-share section-outstanding-doctor'>
                 <div className="section-container">
                     <div className='section-header'>
-                        <span className='title-section'>Bác sĩ nổi bật tuần qua</span>
-                        <button className='btn-section'>Xem thêm</button>
+                        <span className='title-section'><FormattedMessage id='homepage.out-standing-doctor' /></span>
+                        <button className='btn-section'><FormattedMessage id='homepage.more-info' /></button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>
-                            <div className='section-customize'>
-                                <div className='customize-border'>
-                                    <div className='outer-bg'><div className='bg-image section-outstanding-doctor'></div></div>
-                                    <div className='position text-center'>
-                                        <div>Giáo sư, Tiến Sĩ Thai Dev</div>
-                                        <div>Cơ xương khớp</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='customize-border'>
-                                    <div className='outer-bg'><div className='bg-image section-outstanding-doctor'></div></div>
-                                    <div className='position text-center'>
-                                        <div>Giáo sư, Tiến Sĩ Thai Dev</div>
-                                        <div>Cơ xương khớp</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='customize-border'>
-                                    <div className='outer-bg'><div className='bg-image section-outstanding-doctor'></div></div>
-                                    <div className='position text-center'>
-                                        <div>Giáo sư, Tiến Sĩ Thai Dev</div>
-                                        <div>Cơ xương khớp</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='customize-border'>
-                                    <div className='outer-bg'><div className='bg-image section-outstanding-doctor'></div></div>
-                                    <div className='position text-center'>
-                                        <div>Giáo sư, Tiến Sĩ Thai Dev</div>
-                                        <div>Cơ xương khớp</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='customize-border'>
-                                    <div className='outer-bg'><div className='bg-image section-outstanding-doctor'></div></div>
-                                    <div className='position text-center'>
-                                        <div>Giáo sư, Tiến Sĩ Thai Dev</div>
-                                        <div>Cơ xương khớp</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='customize-border'>
-                                    <div className='outer-bg'><div className='bg-image section-outstanding-doctor'></div></div>
-                                    <div className='position text-center'>
-                                        <div>Giáo sư, Tiến Sĩ Thai Dev</div>
-                                        <div>Cơ xương khớp</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='customize-border'>
-                                    <div className='outer-bg'><div className='bg-image section-outstanding-doctor'></div></div>
-                                    <div className='position text-center'>
-                                        <div>Giáo sư, Tiến Sĩ Thai Dev</div>
-                                        <div>Cơ xương khớp</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='customize-border'>
-                                    <div className='outer-bg'><div className='bg-image section-outstanding-doctor'></div></div>
-                                    <div className='position text-center'>
-                                        <div>Giáo sư, Tiến Sĩ Thai Dev</div>
-                                        <div>Cơ xương khớp</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='customize-border'>
-                                    <div className='outer-bg'><div className='bg-image section-outstanding-doctor'></div></div>
-                                    <div className='position text-center'>
-                                        <div>Giáo sư, Tiến Sĩ Thai Dev</div>
-                                        <div>Cơ xương khớp</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='customize-border'>
-                                    <div className='outer-bg'><div className='bg-image section-outstanding-doctor'></div></div>
-                                    <div className='position text-center'>
-                                        <div>Giáo sư, Tiến Sĩ Thai Dev</div>
-                                        <div>Cơ xương khớp</div>
-                                    </div>
-                                </div>
-                            </div>
+                            {arrTopDoctors && arrTopDoctors?.map((data, i) => {
+                                let imageBase64 = '';
+                                // Chuyển đổi ảnh từ Base64 nếu tồn tại
+                                console.log('🚀 ~ {arrTopDoctors&&arrTopDoctors?.map ~ data.image:', data.image)
+                                if (data.image) {
+                                    imageBase64 = new Buffer.from(data.image, 'base64').toString('binary');
+                                }
+                                console.log('🚀 ~ OutStandingDoctor ~ {arrTopDoctors&&arrTopDoctors?.map ~ imageBase64:', imageBase64)
+                                let nameVi = `${data.positionData.valueVi}, ${data.lastName} ${data.firstName}`
+                                let nameEn = `${data.positionData.valueEn}, ${data.firstName} ${data.lastName}`
 
+                                return <div className='section-customize' >
+                                    <div className='customize-border'>
+                                        <div className='outer-bg'><div className='bg-image section-outstanding-doctor'>
+                                            <img src={imageBase64} alt="" /></div></div>
+                                        <div className='position text-center'>
+                                            <div>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
+                                            <div>Cơ xương khớp</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            })}
                         </Slider>
                     </div>
-                </div>
-            </div>
+                </div >
+            </div >
         );
     }
 
@@ -118,12 +70,15 @@ class OutStandingDoctor extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        topDoctors: state.admin.topDoctors,
+        language: state.app.language
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        loadTopDoctors: () => dispatch(actions.fetchTopDoctor()),
     };
 };
 

@@ -14,10 +14,16 @@
             outline: auto;
         }
     }
-    .preview-img{
-        height: 50px;
-        width: 100%;
+    .preview-img {
+        height: 150px;
+        width: 150px;
         border: 1px solid yellowgreen;
-        background: center center no-repeat;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Giữ tỷ lệ ảnh, không cắt ảnh */
+            object-position: center; /* Canh giữa ảnh */
+        }
     }
+    
 }

@@ -6,6 +6,7 @@ import * as actions from "../../../store/actions";
 import Lightbox from 'react-image-lightbox';
 import './UserRedux.scss'
 import TableManageUser from './TableManageUser';
+import { CommonUtils } from '../../../utils';
 
 class UserRedux extends Component {
 
@@ -45,21 +46,21 @@ class UserRedux extends Component {
             const arrGenders = this.props.genders
             this.setState({
                 genderArr: arrGenders,
-                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : ''
+                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : ''
             })
         }
         if (prevProps.positions !== this.props.positions) {
             const arrPositions = this.props.positions
             this.setState({
                 positionArr: arrPositions,
-                positionId: arrPositions && arrPositions.length > 0 ? arrPositions[0].key : ''
+                positionId: arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : ''
             })
         }
         if (prevProps.roles !== this.props.roles) {
             const arrRoles = this.props.roles
             this.setState({
                 roleArr: arrRoles,
-                roleId: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : ''
+                roleId: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : ''
             })
         }
         if (prevProps.users !== this.props.users) {
@@ -76,23 +77,28 @@ class UserRedux extends Component {
                 lastName: '',
                 address: '',
                 phoneNumber: '',
-                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : '',
+                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : '',
                 image: '',
-                roleId: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : '',
-                positionId: arrPositions && arrPositions.length > 0 ? arrPositions[0].key : '',
-                action: CRUD_ACTIONS.CREATE
+                roleId: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : '',
+                positionId: arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : '',
+                action: CRUD_ACTIONS.CREATE,
+                previewImage: ''
             })
         }
     }
-    handleOnChangeImage = (event) => {
+    handleOnChangeImage = async (event) => {
         const file = event.target.files[0]; // Lấy file đầu tiên
         if (file) {
+            const base64 = await CommonUtils.getBase64(file)
             this.setState({
                 previewImage: URL.createObjectURL(file),
-                image: URL.createObjectURL(file)
+                image: base64
             })
         }
 
+    }
+    hashBase64 = async (file) => {
+        return await CommonUtils.getBase64(file)
     }
     handleSaveUser = (event) => {
         event.preventDefault();
@@ -120,9 +126,10 @@ class UserRedux extends Component {
                 image: image,
                 roleId: roleId,
                 positionId: positionId
-
             })
         } else if (action === CRUD_ACTIONS.EDIT) {
+            console.log('f', image.data);
+
             this.props.editUserRedux({
                 id: id,
                 firstName: firstName,
@@ -152,12 +159,16 @@ class UserRedux extends Component {
         const { name, value } = event.target;
         this.setState((prevState) => ({
             ...prevState,
-            [name]: value // cập nhật giá trị theo key
+            [name]: value // cập nhật giá trị theo keyMap
 
         }));
     }
     handleEditUserFromParent = (userEdit) => {
-        console.log('🚀 ~ UserRedux ~ userEdit:', userEdit)
+        let imageBase64 = '';
+        // Chuyển đổi ảnh từ Base64 nếu tồn tại
+        if (userEdit.image) {
+            imageBase64 = new Buffer.from(userEdit.image, 'base64').toString('binary');
+        }
         this.setState({
             id: userEdit.id,
             email: userEdit.email,
@@ -169,6 +180,7 @@ class UserRedux extends Component {
             gender: userEdit.gender,
             image: userEdit.image,
             roleId: userEdit.roleId,
+            previewImage: imageBase64,
             positionId: userEdit.positionId,
             action: CRUD_ACTIONS.EDIT
         })
@@ -185,9 +197,7 @@ class UserRedux extends Component {
             firstName,
             lastName,
             address,
-            phoneNumber, roleId, positionId, gender } = this.state
-        console.log('🚀 ~ UserRedux ~ render ~ gender:', gender)
-        console.log('🚀 ~ UserRedux ~ render ~ position:', positionId)
+            phoneNumber, roleId, positionId, gender, image } = this.state
         return (
             <div className="user-redux-container">
                 <div className="title">DEv</div>
@@ -225,7 +235,7 @@ class UserRedux extends Component {
                                     <label for="inputState"><FormattedMessage id='manage-user.gender' /></label>
                                     <select value={gender} name='gender' className="form-control" onChange={(event) => this.onChangeInput(event)}>
                                         {genders && genders?.map((data, i) => { //use map phải có return trả về data
-                                            return <option value={data.key} key={i} > {language === LANGUAGES.VI ? data.valueVi : data.valueEn}</option>
+                                            return <option value={data.keyMap} key={i} > {language === LANGUAGES.VI ? data.valueVi : data.valueEn}</option>
                                         })}
                                     </select >
                                 </div >
@@ -233,7 +243,7 @@ class UserRedux extends Component {
                                     <label ><FormattedMessage id='manage-user.position' /></label>
                                     <select value={positionId} name='positionId' className="form-control" onChange={(event) => this.onChangeInput(event)}>
                                         {positions && positions?.map((data, i) => { //use map phải có return trả về data
-                                            return <option value={data.key} key={i} > {language === LANGUAGES.VI ? data.valueVi : data.valueEn}</option>
+                                            return <option value={data.keyMap} key={i} > {language === LANGUAGES.VI ? data.valueVi : data.valueEn}</option>
                                         })}
                                     </select >
                                 </div >
@@ -241,7 +251,7 @@ class UserRedux extends Component {
                                     <label for="inputState"><FormattedMessage id='manage-user.role' /></label>
                                     <select value={roleId} name='roleId' className="form-control" onChange={(event) => this.onChangeInput(event)}>
                                         {roles && roles?.map((data, i) => { //use map phải có return trả về data
-                                            return <option value={data.key} key={i} > {language === LANGUAGES.VI ? data.valueVi : data.valueEn}</option>
+                                            return <option value={data.keyMap} key={i} > {language === LANGUAGES.VI ? data.valueVi : data.valueEn}</option>
                                         })}
                                     </select >
                                 </div >
@@ -250,7 +260,9 @@ class UserRedux extends Component {
                                     <div className='preview-img-container'>
                                         <input onChange={(event) => this.handleOnChangeImage(event)} id='previewImg' hidden type="file" className="form-control" />
                                         <label className='label-upload' htmlFor="previewImg"><FormattedMessage id='manage-user.upload' /><i className="fa-solid fa-upload"></i></label>
-                                        <div onClick={() => this.setState({ isOpen: true })} className="preview-img" style={{ background: `url(${this.state.previewImage})` }}></div>
+                                        <div onClick={() => this.setState({ isOpen: true })} className="preview-img"  >
+                                            <img src={this.state.previewImage} alt="" />
+                                        </div>
                                     </div>
                                 </div >
                                 <div className='col-12 my-3'><button onClick={(event) => this.handleSaveUser(event)} className={this.state.action === CRUD_ACTIONS.EDIT ? "btn btn-warning" : "btn btn-primary"} >

@@ -75,6 +75,10 @@
         "other":"Khác",
         "upload": "Tải ảnh"
     },
+    "homepage":{
+        "out-standing-doctor":"Bác sĩ nổi bật tuần qua",
+        "more-info":"Xem thêm"
+    },
     "system": {
         "user-manage": {
             "fail-to-load-fouser": "Không thể tải về danh sách người dùng",

@@ -76,6 +76,10 @@
     "other": "Other",
     "upload": "Upload"
     },
+    "homepage":{
+        "out-standing-doctor":"Last week's featured doctor",
+        "more-info":"More"
+    },
     "system": {
         "user-manage": {
             "fail-to-load-fouser": "Fail to load system users list",

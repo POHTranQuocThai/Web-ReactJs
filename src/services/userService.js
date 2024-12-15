@@ -18,7 +18,9 @@ const editUserService = async (data) => {
 const getAllCodeService = async (dataType) => {
     return (await axios.get(`/api/allcode?type=${dataType}`)).data;
 }
-
+const getTopDoctorHome = async (limit) => {
+    return (await axios.get(`/api/top-doctor-home?limit=${limit}`)).data;
+}
 
 export const userService = {
     handleLogin,
@@ -26,5 +28,6 @@ export const userService = {
     deleteUserService,
     getAllUser,
     editUserService,
-    getAllCodeService
+    getAllCodeService,
+    getTopDoctorHome
 }

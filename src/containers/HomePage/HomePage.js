@@ -17,7 +17,7 @@ class HomePage extends Component {
     render() {
         const settings = {
             dots: false, // Tắt dấu chấm bên dưới slider
-            infinite: true, // Cho phép trượt vòng lặp
+            infinite: false, // Cho phép trượt vòng lặp
             speed: 500, // Tốc độ chuyển đổi giữa các slide (ms)
             slidesToShow: 4, // Số lượng slide hiển thị cùng lúc
             slidesToScroll: 2, // Số lượng slide trượt mỗi lần
@@ -31,7 +31,7 @@ class HomePage extends Component {
                 <HandBook settings={settings} />
                 <About />
                 <HomeFooter />
-                <div style={{ height: '300px' }}></div>
+
             </div>
         );
     }

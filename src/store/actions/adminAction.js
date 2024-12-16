@@ -178,3 +178,49 @@ export const fetchTopDoctor = () => {
         }
     }
 }
+export const fetchAllDoctors = () => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await userService.getAllDoctors()
+            if (res && res.status === 'OK') {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
+                    data: res.data
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_DOCTORS_FAILED
+                })
+            }
+
+        } catch (error) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_DOCTORS_FAILED
+            })
+        }
+    }
+}
+export const saveDetailsDoctorAction = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await userService.saveDetailsDoctor(data)
+            if (res && res.status === 'OK') {
+                dispatch({
+                    type: actionTypes.SAVE_DETAILS_DOCTOR_SUCCESS,
+                })
+                toast.success(res.message)
+            } else {
+                toast.error(res.message)
+                dispatch({
+                    type: actionTypes.SAVE_DETAILS_DOCTOR_FAILED
+                })
+            }
+
+        } catch (error) {
+            toast.error(error)
+            dispatch({
+                type: actionTypes.SAVE_DETAILS_DOCTOR_FAILED
+            })
+        }
+    }
+}

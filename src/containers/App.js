@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
-import { ToastContainer } from 'react-toastify';
-
+import { ToastContainer } from 'react-toastify'; // Correct import
 
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
 
@@ -15,7 +14,6 @@ import Home from '../routes/Home';
 import Header from './Header/Header';
 import System from '../routes/System';
 
-import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
 import Login from './Auth/Login';
 import HomePage from './HomePage/HomePage';
@@ -57,7 +55,6 @@ class App extends Component {
                                 </Switch>
                             </CustomScrollbars>
                         </div>
-
                         <ToastContainer
                             position="top-right"
                             autoClose={5000}

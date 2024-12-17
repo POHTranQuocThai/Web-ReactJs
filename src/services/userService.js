@@ -27,6 +27,9 @@ const getAllDoctors = async () => {
 const saveDetailsDoctor = async (data) => {
     return (await axios.post('/api/save-info-doctors', data)).data
 }
+const getDetailInforDoctor = async (id) => {
+    return (await axios.get(`/api/get-detail-doctor-by-id?id=${id}`)).data
+}
 export const userService = {
     handleLogin,
     createNewUserService,
@@ -36,5 +39,6 @@ export const userService = {
     getAllCodeService,
     getTopDoctorHome,
     getAllDoctors,
-    saveDetailsDoctor
+    saveDetailsDoctor,
+    getDetailInforDoctor
 }

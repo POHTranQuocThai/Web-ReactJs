@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../../store/actions'
 import { LANGUAGES } from '../../../utils';
 import { FormattedMessage } from 'react-intl';
-
+import { withRouter } from 'react-router';
 
 class OutStandingDoctor extends Component {
     constructor(props) {
@@ -24,6 +24,10 @@ class OutStandingDoctor extends Component {
             })
         }
     }
+    handleViewDetailDoctor = (doctor) => {
+        console.log('🚀 ~ OutStandingDoctor ~ doctor:', doctor)
+        this.props.history.push(`/detail-doctor/${doctor.id}`)
+    }
     render() {
         let arrTopDoctors = this.state.arrTopDoctors
         arrTopDoctors = arrTopDoctors.concat(arrTopDoctors).concat(arrTopDoctors).concat(arrTopDoctors).concat(arrTopDoctors)
@@ -40,15 +44,13 @@ class OutStandingDoctor extends Component {
                             {arrTopDoctors && arrTopDoctors?.map((data, i) => {
                                 let imageBase64 = '';
                                 // Chuyển đổi ảnh từ Base64 nếu tồn tại
-                                console.log('🚀 ~ {arrTopDoctors&&arrTopDoctors?.map ~ data.image:', data.image)
                                 if (data.image) {
                                     imageBase64 = new Buffer.from(data.image, 'base64').toString('binary');
                                 }
-                                console.log('🚀 ~ OutStandingDoctor ~ {arrTopDoctors&&arrTopDoctors?.map ~ imageBase64:', imageBase64)
                                 let nameVi = `${data.positionData.valueVi}, ${data.lastName} ${data.firstName}`
                                 let nameEn = `${data.positionData.valueEn}, ${data.firstName} ${data.lastName}`
 
-                                return <div className='section-customize' >
+                                return <div div className='section-customize' key={i} onClick={() => this.handleViewDetailDoctor(data)}>
                                     <div className='customize-border'>
                                         <div className='outer-bg'><div className='bg-image section-outstanding-doctor'>
                                             <img src={imageBase64} alt="" /></div></div>
@@ -82,4 +84,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor));

@@ -26,7 +26,8 @@
                 background: url('/assets/images/bookingcare.png') center center no-repeat;
                 height: 100%; /* Hoặc giá trị cụ thể */
                 width: 100px;
-                background-size: 64%; /* Hình ảnh chiếm 30% kích thước phần tử */            
+                background-size: 64%; /* Hình ảnh chiếm 30% kích thước phần tử */    
+                cursor: pointer;        
             }
             
             i{

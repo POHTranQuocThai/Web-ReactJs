@@ -205,6 +205,7 @@ export const saveDetailsDoctorAction = (data) => {
         try {
             const res = await userService.saveDetailsDoctor(data)
             if (res && res.status === 'OK') {
+                console.log('🚀 ~ return ~ res:', res)
                 dispatch({
                     type: actionTypes.SAVE_DETAILS_DOCTOR_SUCCESS,
                 })

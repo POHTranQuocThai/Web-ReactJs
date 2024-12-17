@@ -54,6 +54,9 @@
             "manage-specialty": "Manage specialties",
             "handbook": "Handbook",
             "manage-handbook": "Manage Handbooks"
+        },
+        "doctor":{
+            "manage-schedule": "Manage medical examination plans"
         }
 
     },

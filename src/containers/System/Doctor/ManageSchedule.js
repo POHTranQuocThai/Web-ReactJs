@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import '../Doctor/ManageSchedule.scss'
 import { FormattedMessage } from 'react-intl';
 import * as actions from "../../../store/actions";
-import { LANGUAGES } from '../../../utils';
+import { DATE_FORMAT, LANGUAGES } from '../../../utils';
 import Select from 'react-select';
 import { userService } from '../../../services/userService';
 import DatePicker from '../../../components/Input/DatePicker';
-
-
-
+import { toast } from 'react-toastify';
+import moment from 'moment';
+import _ from 'lodash';
 
 
 class ManageSchedule extends Component {
@@ -19,7 +19,7 @@ class ManageSchedule extends Component {
             doctorArr: [],
             selectedOption: null,
             currentDate: '',
-            rangeTime: []
+            rangeTime: [],
         }
     }
 
@@ -34,8 +34,12 @@ class ManageSchedule extends Component {
             })
         }
         if (prevProps.allScheduleTime !== this.props.allScheduleTime) {
+            let data = this.props.allScheduleTime
+            if (data && data.length > 0) {
+                data = data.map(item => ({ ...item, isSelected: false }))
+            }
             this.setState({
-                rangeTime: this.props.allScheduleTime
+                rangeTime: data
             })
         }
         // if (prevProps.language !== this.props.language) {
@@ -57,27 +61,52 @@ class ManageSchedule extends Component {
     }
     handleChange = async selectedOption => {
         this.setState({ selectedOption })
-        const res = await userService.getDetailInforDoctor(selectedOption.value)
-        if (res && res.status === 'OK' && res.data && res.data.Markdown) {
-            const markdown = res.data.Markdown
-            this.setState({
-                contentMarkdown: markdown.contentMarkdown,
-                contentHTML: markdown.contentHTML,
-                description: markdown.description,
-                hasOldData: true
-            })
-        } else {
-            this.setState({
-                contentMarkdown: '',
-                contentHTML: '',
-                description: '',
-                hasOldData: false
-            })
-        }
     }
     handleOnChangeDatePicker = (date) => {
-        console.log('🚀 ~ ManageSchedule ~ date:', date)
         this.setState({ currentDate: date[0] })
+    }
+    handleClickBtnTime = (index) => {
+        // Tạo một bản sao của mảng rangeTime
+        const updatedRangeTime = this.state.rangeTime.map((item, i) => {
+            // Chỉ cập nhật isSelected của phần tử tại index
+            if (i === index) {
+                return {
+                    ...item,
+                    isSelected: !item.isSelected
+                };
+            }
+            return item; // Giữ nguyên các phần tử khác
+        });
+        // Cập nhật state với mảng mới
+        this.setState({
+            rangeTime: updatedRangeTime
+        });
+    };
+    handleSaveSchedule = () => {
+        const { rangeTime, selectedOption, currentDate } = this.state
+        const result = []
+        if (!currentDate || !selectedOption) {
+            toast.error('Please choose date & doctor name!')
+            return
+        }
+        const formatedDate = moment(currentDate).format(DATE_FORMAT.SEND_TO_SERVER)
+        const selectedTime = rangeTime?.filter(time => {
+            return time.isSelected && time
+        })
+        if (!_.isEmpty(selectedTime)) {
+            selectedTime?.map(time => {
+                let obj = {}
+                obj.doctorId = selectedOption.value
+                obj.date = formatedDate
+                obj.time = time.keyMap
+                result.push(obj)
+            })
+        } else {
+            toast.error('Please choose time work')
+            return
+        }
+        console.log('🚀 ~ ManageSchedule ~ result:', result)
+        return result
     }
     render() {
         const { rangeTime } = this.state
@@ -104,19 +133,19 @@ class ManageSchedule extends Component {
                         <div className="col-12 pick-hour-container">
                             {rangeTime && rangeTime.map((time, i) => {
                                 return (
-                                    <button className='btn ' key={i}>
+                                    <button className={time?.isSelected ? 'btn btn-warning' : 'btn'} onClick={() => this.handleClickBtnTime(i)} key={i}>
                                         {language === LANGUAGES.VI ? time.valueVi : time.valueEn}
                                     </button>
                                 )
                             })}
                         </div>
                         <div className="col-12">
-                            <button className="btn btn-primary btn-save-schedule"><FormattedMessage id='manage-schedule.save' /></button>
+                            <button onClick={() => this.handleSaveSchedule()} className="btn btn-primary btn-save-schedule"><FormattedMessage id='manage-schedule.save' /></button>
                         </div>
 
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }

@@ -19,7 +19,7 @@ export const CRUD_ACTIONS = {
     READ: 'READ'
 };
 
-export const dateFormat = {
+export const DATE_FORMAT = {
     SEND_TO_SERVER: 'DD/MM/YYYY'
 };
 

@@ -106,12 +106,19 @@ class ManageSchedule extends Component {
             toast.error('Please choose time work')
             return
         }
-        console.log('🚀 ~ ManageSchedule ~ result:', result)
         const res = await userService.bulkCreateSchedule({ schedule: result, doctorId: selectedOption.value, date: formatedDate })
+        if (res && res.status === 'OK') {
+            toast.success('Save info succeed!')
+        } else {
+            toast.error('Error')
+
+        }
     }
     render() {
         const { rangeTime } = this.state
         const { language } = this.props
+        const yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
+
         return (
             <div className="manage-schedule-container">
                 <div className="m-s-title"><FormattedMessage id='manage-schedule.title' /></div>
@@ -128,7 +135,7 @@ class ManageSchedule extends Component {
                             <label htmlFor=""><FormattedMessage id='manage-schedule.choose-date' /></label>
                             <DatePicker onChange={this.handleOnChangeDatePicker}
                                 value={this.state.currentDate}
-                                minDate={new Date()}
+                                minDate={yesterday}
                                 className='form-control' />
                         </div>
                         <div className="col-12 pick-hour-container">

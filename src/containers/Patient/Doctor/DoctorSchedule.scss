@@ -32,25 +32,40 @@
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
-            button{
-                padding: 8px 10px;
-                border: none;
-                outline: none;
-                background: rgb(245, 219, 19);
-                min-width: 120px;
-                border-radius: 5px;
-                font-weight: 600;
-                color: #333;
-                &:hover{
-                    background-color: #45c3d2;
-                    color: #fff;
+            .time-content-btns{
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                button{
+                    padding: 8px 10px;
+                    border: none;
+                    outline: none;
+                    background: rgb(245, 219, 19);
+                    min-width: 120px;
+                    border-radius: 5px;
+                    font-weight: 600;
+                    color: #333;
+                    &:hover{
+                        background-color: #45c3d2;
+                        color: #fff;
+                    }
                 }
+                .btn-vi{
+                    min-width: 120px;
+                }
+                .btn-en{
+                    min-width: 15v0px;
+                }
+            }
+            .book-free{
+                margin-top: 10px;
             }
             .time-content__notification{
                 margin-left: 5px;
                 margin-top: 10px;
-                font-weight: 600;
+                font-weight: 400;
                 font-style: italic;
+                color: grey;
             }
         }
     }

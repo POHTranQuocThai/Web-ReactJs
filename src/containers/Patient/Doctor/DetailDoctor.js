@@ -4,6 +4,7 @@ import HomeHeader from '../../HomePage/HomeHeader';
 import '../Doctor/DetailDoctor.scss'
 import { userService } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
+import DoctorSchedule from './DoctorSchedule';
 
 class DetailDoctor extends Component {
     constructor(props) {
@@ -16,7 +17,6 @@ class DetailDoctor extends Component {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             const id = this.props.match.params.id
             const res = await userService.getDetailInforDoctor(id)
-            console.log('🚀 ~ DetailDoctor ~ componentDidMount ~ res:', res)
             if (res && res.status === 'OK') {
                 this.setState({
                     detailDoctor: res.data
@@ -55,7 +55,12 @@ class DetailDoctor extends Component {
                         </div>
                     </div>
                     <div className="schedule-doctor">
+                        <div className="content-left">
 
+                        </div>
+                        <div className="content-right">
+                            <DoctorSchedule doctorIdFromParent={detailDoctor?.id ? detailDoctor.id : -1} />
+                        </div>
                     </div>
                     <div className="detail-infor-doctor">
                         {detailDoctor?.Markdown?.contentHTML &&

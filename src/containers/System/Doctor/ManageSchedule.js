@@ -82,14 +82,15 @@ class ManageSchedule extends Component {
             rangeTime: updatedRangeTime
         });
     };
-    handleSaveSchedule = () => {
+    handleSaveSchedule = async () => {
         const { rangeTime, selectedOption, currentDate } = this.state
         const result = []
         if (!currentDate || !selectedOption) {
             toast.error('Please choose date & doctor name!')
             return
         }
-        const formatedDate = moment(currentDate).format(DATE_FORMAT.SEND_TO_SERVER)
+        const formatedDate = new Date(currentDate).getTime()
+        console.log('🚀 ~ ManageSchedule ~ handleSaveSchedule= ~ formatedDate:', formatedDate)
         const selectedTime = rangeTime?.filter(time => {
             return time.isSelected && time
         })
@@ -98,7 +99,7 @@ class ManageSchedule extends Component {
                 let obj = {}
                 obj.doctorId = selectedOption.value
                 obj.date = formatedDate
-                obj.time = time.keyMap
+                obj.timeType = time.keyMap
                 result.push(obj)
             })
         } else {
@@ -106,7 +107,7 @@ class ManageSchedule extends Component {
             return
         }
         console.log('🚀 ~ ManageSchedule ~ result:', result)
-        return result
+        const res = await userService.bulkCreateSchedule({ schedule: result, doctorId: selectedOption.value, date: formatedDate })
     }
     render() {
         const { rangeTime } = this.state

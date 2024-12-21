@@ -32,6 +32,7 @@
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
+            flex-direction: column;
             .time-content-btns{
                 display: flex;
                 gap: 10px;
@@ -58,8 +59,13 @@
                 }
             }
             .book-free{
-                margin-top: 10px;
-            }
+                margin-top: 70px;
+                font-size: 14px;
+                color: grey;
+                i{
+                    color: #45c3d2;
+                }
+                }
             .time-content__notification{
                 margin-left: 5px;
                 margin-top: 10px;

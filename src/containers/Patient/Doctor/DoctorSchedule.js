@@ -114,7 +114,7 @@ class DoctorSchedule extends Component {
                                     })}
                                 </div>
                                 <div className='book-free'>
-                                    <span><FormattedMessage id='patient.detail-doctor.choose' />
+                                    <span><FormattedMessage id='patient.detail-doctor.choose' /> <i className="fa-solid fa-hand-point-up"></i>
                                         <FormattedMessage id='patient.detail-doctor.book-free' />
                                     </span>
                                 </div>

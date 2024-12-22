@@ -252,7 +252,6 @@ export const getRequiredDoctorInfor = () => {
     return async (dispatch, getState) => {
         try {
             const resPrice = await userService.getAllCodeService('PRICE')
-            console.log('🚀 ~ return ~ resPrice:', resPrice)
             const resPayment = await userService.getAllCodeService('PAYMENT')
             const resProvince = await userService.getAllCodeService('PROVINCE')
             if (resPrice && resPrice.status === 'OK'

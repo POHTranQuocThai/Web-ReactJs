@@ -103,7 +103,13 @@
             "choose-doctor":"Choose doctor",
             "intro":"Introduction information",
             "save": "Save",
-            "create":"Add"
+            "create":"Add",
+            "price":"Choose price",
+            "payment":"Select payment method",
+            "province":"Choose province",
+            "nameClinic":"Clinic name",
+            "addressClinic":"Clinic address",
+            "note":"Note"
         }
     }
 }

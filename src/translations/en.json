@@ -95,6 +95,13 @@
             "no-schedule":"The doctor does not have an appointment scheduled, please choose another time!",
             "choose":"Choose",
             "book-free":" and book (free)"
+        },
+        "extra-infor-doctor":{
+            "text-address":"Examination address",
+            "price":"Examination price:",
+            "detail":"See details",
+            "payment":"Select payment method",
+            "hide-price":"Hide price list"
         }
     },
     "admin":{

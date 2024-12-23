@@ -102,6 +102,20 @@
             "detail":"See details",
             "payment":"Select payment method",
             "hide-price":"Hide price list"
+        },
+        "booking-modal":{
+            "title":"Examination schedule information",
+            "fullname":"Full name",
+            "phoneNumber":"Phone number",
+            "email":"Email address",
+            "address":"Contact address",
+            "reason":"Reason for medical examination",
+            "birthday":"Birthday",
+            "gender":"Gender",
+            "btnConfirm":"Confirm",
+            "btnCancel":"Cancel",
+            "priceBooking":"Free booking",
+            "price":"Examination price:"
         }
     },
     "admin":{

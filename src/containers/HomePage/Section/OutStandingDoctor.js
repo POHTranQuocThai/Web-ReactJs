@@ -25,10 +25,10 @@ class OutStandingDoctor extends Component {
         }
     }
     handleViewDetailDoctor = (doctor) => {
-        console.log('🚀 ~ OutStandingDoctor ~ doctor:', doctor)
         this.props.history.push(`/detail-doctor/${doctor.id}`)
     }
     render() {
+
         let arrTopDoctors = this.state.arrTopDoctors
         arrTopDoctors = arrTopDoctors.concat(arrTopDoctors).concat(arrTopDoctors).concat(arrTopDoctors).concat(arrTopDoctors)
         const language = this.props.language
@@ -50,10 +50,11 @@ class OutStandingDoctor extends Component {
                                 let nameVi = `${data.positionData.valueVi}, ${data.lastName} ${data.firstName}`
                                 let nameEn = `${data.positionData.valueEn}, ${data.firstName} ${data.lastName}`
 
-                                return <div div className='section-customize' key={i} onClick={() => this.handleViewDetailDoctor(data)}>
+                                return <div className='section-customize' key={i} onClick={() => this.handleViewDetailDoctor(data)}>
                                     <div className='customize-border'>
                                         <div className='outer-bg'><div className='bg-image section-outstanding-doctor'>
-                                            <img src={imageBase64} alt="" /></div></div>
+                                            <img src={imageBase64} alt="" /></div>
+                                        </div>
                                         <div className='position text-center'>
                                             <div>{language === LANGUAGES.VI ? nameVi : nameEn}</div>
                                             <div>Cơ xương khớp</div>

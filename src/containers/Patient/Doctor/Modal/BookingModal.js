@@ -12,6 +12,7 @@ import Select from 'react-select'
 import { userService } from '../../../../services/userService';
 import { toast } from 'react-toastify';
 import { FormattedMessage } from 'react-intl';
+import moment from 'moment';
 
 class BookingModal extends Component {
     constructor(props) {
@@ -82,6 +83,8 @@ class BookingModal extends Component {
         });
     };
     handleConfirmBooking = async () => {
+        const timeString = this.buildTimeBooking(this.props.dataTime)
+        const doctorName = this.buildDoctorName(this.props.dataTime)
         const res = await userService.postPatientBookAppointment({
             fullname: this.state.fullname,
             phoneNumber: this.state.phoneNumber,
@@ -91,7 +94,10 @@ class BookingModal extends Component {
             doctorId: this.state.doctorId,
             address: this.state.address,
             selectedGender: this.state.selectedGender.value,
-            timeType: this.state.timeType
+            timeType: this.state.timeType,
+            language: this.props.language,
+            timeString: timeString,
+            doctorName: doctorName
         })
         console.log('🚀 ~ BookingModal ~ handleConfirmBooking= ~ email:', this.state)
         if (res && res.status === 'OK') {
@@ -100,6 +106,30 @@ class BookingModal extends Component {
         } else {
             toast.error('Err!')
         }
+    }
+    buildTimeBooking = (dataTime) => {
+        const { language } = this.props
+        if (dataTime && !_.isEmpty(dataTime)) {
+            const time = language === LANGUAGES.EN ?
+                dataTime.timeTypeData.valueEn : dataTime.timeTypeData.valueVi
+            const date = language === LANGUAGES.VI ?
+                moment.unix(+dataTime.date / 1000).format('dddd - DD/MM/YYYY') :
+                moment.unix(+dataTime.date / 1000).locale('en').format('ddd - DD/MM/YYYY')
+
+            return `${time} - ${date}`
+
+        }
+        return ''
+    }
+    buildDoctorName = (dataTime) => {
+        const { language } = this.props
+        if (dataTime && !_.isEmpty(dataTime)) {
+            const name = language === LANGUAGES.VI ?
+                `${dataTime.doctorData.lastName} ${dataTime.doctorData.firstName}`
+                : `${dataTime.doctorData.firstName} ${dataTime.doctorData.lastName}`
+            return name
+        }
+        return ''
     }
     render() {
         const { isOpenModal, closeBooking, dataTime } = this.props

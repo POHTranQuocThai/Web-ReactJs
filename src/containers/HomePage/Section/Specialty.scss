@@ -1,52 +1,23 @@
-.section-specialty{
-    height: 330px;
-    background: #f5f5f5;
 
-    .section-container{
-        margin: 0 100px;
-        display: flex;
-        flex-direction: column;
-        .section-header{
-             height: 60px;
-             margin-bottom: 30px;
-             padding-top: 30px;
-             .title-section{
-                font-size: 22px;
-                font-weight: 600;
-             }
-             .btn-section{
-                float: right;
-                padding: 10px 15px;
-                border: none;
-                outline: none;
-                display: block;
-                background: #eee;
-                &:hover{
-                    background: rgb(200, 200, 28);
-                    color: #fff;
-                }
-             }
-        }
-        .section-body{
+       
+   
             .section-customize{
+                cursor: pointer;
                 .bg-image{
-                    background: url('../../../assets/images/specialty/image.png') center center no-repeat;
                     background-color: #eee;
                     width: 290px;
                     background-size: cover;
                     height: 150px;
                     border-radius: 20px;
                 }
-            }
-            .bg-image{
-                display: block;
-                height: 200px;
-                width: 280px;
-            }
-           
-          
-        }
-    }
+                .section-customize__desc{
+                    margin-top: 15px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    &:hover{
+                        color: rgb(86, 211, 211);
+                    }
+                }         
     
 }
 

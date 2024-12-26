@@ -45,6 +45,15 @@ const getProfileDoctorById = async (doctorId) => {
 const postPatientBookAppointment = async (data) => {
     return (await axios.post(`/api/patient-book-appointment`, data)).data
 }
+const postVerifyBookAppointment = async (data) => {
+    return (await axios.post(`/api/verify-book-appointment`, data)).data
+}
+const createNewSpecialty = async (data) => {
+    return (await axios.post(`/api/create-new-specialty`, data)).data
+}
+const getAllSpecialty = async () => {
+    return (await axios.get(`/api/get-specialty`)).data
+}
 
 export const userService = {
     handleLogin,
@@ -61,5 +70,8 @@ export const userService = {
     getScheduleByDate,
     getExtrainForDoctorById,
     getProfileDoctorById,
-    postPatientBookAppointment
+    postPatientBookAppointment,
+    postVerifyBookAppointment,
+    createNewSpecialty,
+    getAllSpecialty
 }

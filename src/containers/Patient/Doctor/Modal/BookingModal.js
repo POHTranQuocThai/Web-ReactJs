@@ -99,10 +99,9 @@ class BookingModal extends Component {
             timeString: timeString,
             doctorName: doctorName
         })
-        console.log('🚀 ~ BookingModal ~ handleConfirmBooking= ~ email:', this.state)
         if (res && res.status === 'OK') {
-            toast.success('Booking a new appointment succeed!')
             this.props.closeBooking()
+            toast.success('Booking a new appointment succeed!')
         } else {
             toast.error('Err!')
         }

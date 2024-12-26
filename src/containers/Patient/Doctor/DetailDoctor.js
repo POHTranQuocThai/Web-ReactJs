@@ -7,6 +7,7 @@ import { LANGUAGES } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorExtrainfor from './DoctorExtrainfor';
 
+
 class DetailDoctor extends Component {
     constructor(props) {
         super(props)
@@ -30,7 +31,6 @@ class DetailDoctor extends Component {
         }
     }
     componentDidUpdate(prevProps, prevState) {
-
     }
     render() {
         const { detailDoctor } = this.state

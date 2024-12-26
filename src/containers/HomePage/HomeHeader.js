@@ -10,7 +10,6 @@ import { withRouter } from 'react-router-dom';
 
 class HomeHeader extends Component {
     changeLanguage = (language) => {
-        console.log('🚀 ~ HomeHeader ~ language:', language)
         this.props.changeLanguageAppRedux(language)
     }
     returnHomePage = () => {

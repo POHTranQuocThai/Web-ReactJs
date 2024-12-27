@@ -120,11 +120,11 @@ class ManageDoctor extends Component {
     handleChange = async selectedDoctor => {
         this.setState({ selectedDoctor })
         const res = await userService.getDetailInforDoctor(selectedDoctor.value)
-        const { listPayment, listProvince, listPrice } = this.state
+        const { listPayment, listProvince, listPrice, listSpecialty } = this.state
         if (res && res.status === 'OK' && res.data && res.data.Markdown) {
             const markdown = res.data.Markdown
             let addressClinic = '', nameClinic = '', note = '', priceId = '', paymentId = '', provinceId = '',
-                selectedPrice = '', selectedPayment = '', selectedProvince = ''
+                selectedPrice = '', selectedPayment = '', selectedProvince = '', selectedSpecialty = '', specialtyId = ''
             if (res.data.Doctor_Infor) {
                 addressClinic = res.data.Doctor_Infor.addressClinic
                 nameClinic = res.data.Doctor_Infor.addressClinic
@@ -133,6 +133,7 @@ class ManageDoctor extends Component {
                 paymentId = res.data.Doctor_Infor.paymentId
                 priceId = res.data.Doctor_Infor.priceId
                 provinceId = res.data.Doctor_Infor.provinceId
+                specialtyId = res.data.Doctor_Infor.specialtyId
                 selectedPayment = listPayment.find(item => {
                     return item && item.value === paymentId
                 })
@@ -141,6 +142,9 @@ class ManageDoctor extends Component {
                 })
                 selectedProvince = listProvince.find(item => {
                     return item && item.value === provinceId
+                })
+                selectedSpecialty = listSpecialty.find(item => {
+                    return item && item.value === specialtyId
                 })
             }
             this.setState({
@@ -154,14 +158,18 @@ class ManageDoctor extends Component {
                 note: note,
                 selectedPayment: selectedPayment,
                 selectedPrice: selectedPrice,
-                selectedProvince: selectedProvince
+                selectedProvince: selectedProvince,
+                selectedSpecialty: selectedSpecialty
             })
         } else {
             this.setState({
                 contentMarkdown: '',
                 contentHTML: '',
                 description: '',
-                hasOldData: false
+                hasOldData: false,
+                addressClinic: '',
+                note: '',
+                nameClinic: ''
             })
         }
     }
@@ -300,9 +308,6 @@ class ManageDoctor extends Component {
                         />
                     </div>
                 </div>
-                <div className='manage-doctor-editor'>
-                    <MdEditor style={{ height: '500px' }} value={this.state.contentMarkdown} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} />
-                </div>
                 <div className="row">
                     <div className="col-4 form-group">
                         <label><FormattedMessage id='admin.manage-doctor.specialty' /></label>
@@ -323,6 +328,10 @@ class ManageDoctor extends Component {
                         />
                     </div>
                 </div>
+                <div className='manage-doctor-editor'>
+                    <MdEditor style={{ height: '500px' }} value={this.state.contentMarkdown} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} />
+                </div>
+
                 <button onClick={() => this.handleSaveContentMarkdown()} className={hasOldData ? 'btn btn-info edit-content-doctor' : 'save-content-doctor'}>
                     {hasOldData ? <FormattedMessage id='admin.manage-doctor.save' /> : <FormattedMessage id='admin.manage-doctor.create' />}
                 </button>

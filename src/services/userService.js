@@ -54,6 +54,9 @@ const createNewSpecialty = async (data) => {
 const getAllSpecialty = async () => {
     return (await axios.get(`/api/get-specialty`)).data
 }
+const getDetialSpecialtyById = async (id, location) => {
+    return (await axios.get(`/api/get-detail-specialty-by-id?id=${id}&location=${location}`)).data
+}
 
 export const userService = {
     handleLogin,
@@ -73,5 +76,6 @@ export const userService = {
     postPatientBookAppointment,
     postVerifyBookAppointment,
     createNewSpecialty,
-    getAllSpecialty
+    getAllSpecialty,
+    getDetialSpecialtyById
 }

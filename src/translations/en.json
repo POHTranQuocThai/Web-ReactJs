@@ -116,7 +116,7 @@
             "btnConfirm":"Confirm",
             "btnCancel":"Cancel",
             "priceBooking":"Free booking",
-            "price":"Examination price:"
+            "price":"Examination price: "
         }
     },
     "admin":{

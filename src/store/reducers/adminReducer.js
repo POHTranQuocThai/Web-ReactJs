@@ -101,7 +101,6 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.FETCH_REQUIRED_DOCTOR_INFOR_SUCCESS:
-            console.log('🚀 ~ adminReducer ~ allRequiredDoctorInfor:', action.data)
             return {
                 ...state,
                 allRequiredDoctorInfor: action.data,

@@ -17,7 +17,15 @@ class DoctorExtrainfor extends Component {
         }
     }
     async componentDidMount() {
-
+        if (this.props.doctorIdFromParent) {
+            const res = await userService.getExtrainForDoctorById(this.props.doctorIdFromParent)
+            console.log('🚀 ~ DoctorExtrainfor ~ componentDidUpdate ~ res.data:', res.data)
+            if (res && res.status === 'OK') {
+                this.setState({
+                    extrainInfor: res.data
+                })
+            }
+        }
     }
     async componentDidUpdate(prevProps, prevState) {
         if (this.props.language !== prevProps.language) {

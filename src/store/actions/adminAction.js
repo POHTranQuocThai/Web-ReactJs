@@ -254,14 +254,17 @@ export const getRequiredDoctorInfor = () => {
             const resPrice = await userService.getAllCodeService('PRICE')
             const resPayment = await userService.getAllCodeService('PAYMENT')
             const resProvince = await userService.getAllCodeService('PROVINCE')
+            const resSpecialty = await userService.getAllSpecialty()
             if (resPrice && resPrice.status === 'OK'
                 && resPayment && resPayment.status === 'OK'
                 && resProvince && resProvince.status === 'OK'
+                && resSpecialty && resSpecialty.status === 'OK'
             ) {
                 const data = {
                     resPrice: resPrice.data,
                     resPayment: resPayment.data,
-                    resProvince: resProvince.data
+                    resProvince: resProvince.data,
+                    resSpecialty: resSpecialty.data
                 }
                 dispatch(fetchRequiredDoctorInforSuccess(data))
             } else {

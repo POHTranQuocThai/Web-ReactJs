@@ -2,11 +2,33 @@
 import Slider from 'react-slick';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { userService } from '../../../services/userService';
+import '../Section/MedicalFacility.scss'
+import { withRouter } from 'react-router'
 
 
 class MedicalFacility extends Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            dataClinics: []
+        }
+    }
+    async componentDidMount() {
+        const res = await userService.getAllClinic()
+        if (res && res.status === 'OK') {
+            this.setState({
+                dataClinics: res.data ? res.data : []
+            })
+        }
+    }
+    handleViewDetailSpecialty = (item) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-clinic/${item.id}`)
+        }
+    }
     render() {
+        const { dataClinics } = this.state
         return (
             <div className='section-share section-medical-facility'>
                 <div className="section-container">
@@ -16,38 +38,17 @@ class MedicalFacility extends Component {
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>
-                            <div className='section-customize'>
-                                <div className='bg-image section-medical-facility'></div>
-                                <div>Hệ thống y tế Thu Cúc 1</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='bg-image section-medical-facility'></div>
-                                <div>Hệ thống y tế Thu Cúc 1</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='bg-image section-medical-facility'></div>
-                                <div>Hệ thống y tế Thu Cúc 1</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='bg-image section-medical-facility'></div>
-                                <div>Hệ thống y tế Thu Cúc 1</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='bg-image section-medical-facility'></div>
-                                <div>Hệ thống y tế Thu Cúc 1</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='bg-image section-medical-facility'></div>
-                                <div>Hệ thống y tế Thu Cúc 1</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='bg-image section-medical-facility'></div>
-                                <div>Hệ thống y tế Thu Cúc 1</div>
-                            </div>
-                            <div className='section-customize'>
-                                <div className='bg-image section-medical-facility'></div>
-                                <div>Hệ thống y tế Thu Cúc 1</div>
-                            </div>
+                            {dataClinics && dataClinics.length > 0 &&
+                                dataClinics.map((item, i) => {
+                                    return (
+                                        <div className='section-customize' key={i} onClick={() => this.handleViewDetailSpecialty(item)}>
+                                            <div className='bg-image section-medical-facility' style={{ backgroundImage: `url(${item.image})` }}></div>
+                                            <div className='section-customize__desc'>{item.name}</div>
+                                        </div>
+                                    )
+                                })
+                            }
+
                         </Slider>
                     </div>
                 </div>
@@ -68,4 +69,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MedicalFacility));

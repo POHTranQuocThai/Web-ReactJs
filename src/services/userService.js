@@ -57,7 +57,15 @@ const getAllSpecialty = async () => {
 const getDetialSpecialtyById = async (id, location) => {
     return (await axios.get(`/api/get-detail-specialty-by-id?id=${id}&location=${location}`)).data
 }
-
+const createNewClinic = async (data) => {
+    return (await axios.post(`/api/create-new-clinic`, data)).data
+}
+const getAllClinic = async () => {
+    return (await axios.get(`/api/get-clinic`)).data
+}
+const getDetialClinicById = async (id) => {
+    return (await axios.get(`/api/get-detail-clinic-by-id?id=${id}`)).data
+}
 export const userService = {
     handleLogin,
     createNewUserService,
@@ -77,5 +85,8 @@ export const userService = {
     postVerifyBookAppointment,
     createNewSpecialty,
     getAllSpecialty,
-    getDetialSpecialtyById
+    getDetialSpecialtyById,
+    createNewClinic,
+    getAllClinic,
+    getDetialClinicById
 }

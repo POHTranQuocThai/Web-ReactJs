@@ -3,19 +3,15 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import '../Clinic/DetailClinic.scss'
 import { withRouter } from 'react-router';
-import MarkdownIt from 'markdown-it';
-import MdEditor from 'react-markdown-editor-lite';
-import { CommonUtils, LANGUAGES } from '../../../utils';
 import { userService } from '../../../services/userService';
-import { toast } from 'react-toastify';
 import DoctorExtrainfor from '../Doctor/DoctorExtrainfor';
 import DoctorSchedule from '../Doctor/DoctorSchedule';
 import ProfileDoctor from '../Doctor/ProfileDoctor';
 import HomeHeader from '../../HomePage/HomeHeader';
 import _ from 'lodash';
+import { LANGUAGES } from '../../../utils';
 
 
-const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 
 class DetailClinic extends Component {
@@ -80,6 +76,7 @@ class DetailClinic extends Component {
     }
     render() {
         const { arrDoctorId, dataDetailClinic, listProvince } = this.state
+        console.log('🚀 ~ DetailClinic ~ render ~ listProvince:', listProvince)
         const { language } = this.props
         return (
             <div className='detail-specialty-container'>
@@ -94,7 +91,7 @@ class DetailClinic extends Component {
                             </>
                         }
                     </div>
-                    {/* <div className="search-sp-doctor">
+                    <div className="search-sp-doctor">
                         <select onChange={(e) => this.handleOnChangeSelect(e)}>
                             {listProvince && listProvince.length > 0 &&
                                 listProvince.map((item, i) => {
@@ -134,7 +131,7 @@ class DetailClinic extends Component {
                                 </div>
                             )
                         })
-                    } */}
+                    }
                 </div>
             </div>
         );

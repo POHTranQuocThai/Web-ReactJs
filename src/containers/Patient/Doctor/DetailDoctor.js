@@ -34,6 +34,7 @@ class DetailDoctor extends Component {
     }
     render() {
         const { detailDoctor } = this.state
+        console.log('🚀 ~ DetailDoctor ~ render ~ detailDoctor:', detailDoctor)
         const { language } = this.props
         let nameVi = '', nameEn = ''
         if (detailDoctor && detailDoctor?.positionData) {

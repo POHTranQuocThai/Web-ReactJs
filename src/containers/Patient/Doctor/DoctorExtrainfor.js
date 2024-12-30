@@ -19,7 +19,6 @@ class DoctorExtrainfor extends Component {
     async componentDidMount() {
         if (this.props.doctorIdFromParent) {
             const res = await userService.getExtrainForDoctorById(this.props.doctorIdFromParent)
-            console.log('🚀 ~ DoctorExtrainfor ~ componentDidUpdate ~ res.data:', res.data)
             if (res && res.status === 'OK') {
                 this.setState({
                     extrainInfor: res.data
@@ -33,7 +32,6 @@ class DoctorExtrainfor extends Component {
         }
         if (prevProps.doctorIdFromParent !== this.props.doctorIdFromParent) {
             const res = await userService.getExtrainForDoctorById(this.props.doctorIdFromParent)
-            console.log('🚀 ~ DoctorExtrainfor ~ componentDidUpdate ~ res.data:', res.data)
             if (res && res.status === 'OK') {
                 this.setState({
                     extrainInfor: res.data
@@ -69,7 +67,7 @@ class DoctorExtrainfor extends Component {
                                                 value={parseFloat(extrainInfor.priceTypeData.valueVi)}
                                                 displayType="text"
                                                 thousandSeparator
-                                                suffix=" VND"
+                                                suffix="VND"
                                             />
                                         </span>
                                     )}

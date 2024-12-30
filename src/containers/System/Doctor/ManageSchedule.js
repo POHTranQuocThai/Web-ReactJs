@@ -117,7 +117,8 @@ class ManageSchedule extends Component {
     render() {
         const { rangeTime } = this.state
         const { language } = this.props
-        const yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
+        const yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+
 
         return (
             <div className="manage-schedule-container">

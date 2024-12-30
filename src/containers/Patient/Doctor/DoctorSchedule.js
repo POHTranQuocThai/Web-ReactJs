@@ -6,7 +6,7 @@ import { LANGUAGES } from '../../../utils';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import BookingModal from './Modal/BookingModal';
-
+import 'moment/locale/vi'; // Import tiếng Việt
 
 class DoctorSchedule extends Component {
     constructor(props) {
@@ -64,6 +64,7 @@ class DoctorSchedule extends Component {
     async componentDidUpdate(prevProps, prevState) {
         if (prevProps.language !== this.props.language) {
             const allDays = this.getArrDays(this.props.language)
+            console.log('🚀 ~ DoctorSchedule ~ componentDidUpdate ~ allDays:', allDays)
             this.setState({
                 allDays: allDays
             })
@@ -101,6 +102,7 @@ class DoctorSchedule extends Component {
     }
     render() {
         const { allDays, allAvalableTime, isOpenModalBooking, dataScheduleTimeModal } = this.state
+        console.log('🚀 ~ DoctorSchedule ~ render ~ allDays:', allDays)
         const { language } = this.props
         return (
             <>

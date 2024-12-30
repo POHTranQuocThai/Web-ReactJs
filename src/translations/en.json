@@ -56,7 +56,8 @@
             "manage-handbook": "Manage Handbooks"
         },
         "doctor":{
-            "manage-schedule": "Manage medical examination plans"
+            "manage-schedule": "Manage medical examination plans",
+            "manage-patient":"Managing medical examination patients"
         }
 
     },

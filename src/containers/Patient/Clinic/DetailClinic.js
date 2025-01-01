@@ -60,6 +60,7 @@ class DetailClinic extends Component {
                 if (data && !_.isEmpty(data)) {
                     const arr = data.doctorSpecialty
                     if (arr && arr.length > 0) {
+                        console.log('🚀 ~ DetailClinic ~ handleOnChangeSelect= ~ arr:', arr)
                         arr.map(item => {
                             arrDoctorId.push(item.doctorId)
                         })
@@ -76,6 +77,7 @@ class DetailClinic extends Component {
     }
     render() {
         const { arrDoctorId, dataDetailClinic, listProvince } = this.state
+        console.log('🚀 ~ DetailClinic ~ render ~ arrDoctorId:', arrDoctorId)
         console.log('🚀 ~ DetailClinic ~ render ~ listProvince:', listProvince)
         const { language } = this.props
         return (

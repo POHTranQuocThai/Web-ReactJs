@@ -108,6 +108,7 @@ class ManageSchedule extends Component {
         }
         const res = await userService.bulkCreateSchedule({ schedule: result, doctorId: selectedOption.value, date: formatedDate })
         if (res && res.status === 'OK') {
+            console.log('🚀 ~ ManageSchedule ~ handleSaveSchedule= ~ res:', res)
             toast.success('Save info succeed!')
         } else {
             toast.error('Error')

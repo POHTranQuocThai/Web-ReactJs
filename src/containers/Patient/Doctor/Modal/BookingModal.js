@@ -140,6 +140,7 @@ class BookingModal extends Component {
     render() {
         const { isOpenModal, closeBooking, dataTime } = this.props
         const { fullname, email, birthday, doctorId, phoneNumber, isShowLoading, address, reason, genders, selectedGender } = this.state
+        console.log('🚀 ~ BookingModal ~ render ~ genders:', genders)
 
         return (
             <LoadingOverlay active={isShowLoading} spinner  >

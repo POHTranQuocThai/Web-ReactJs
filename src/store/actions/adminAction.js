@@ -6,7 +6,7 @@ export const fetchGenderStart = () => {
     return async (dispatch, getState) => {
         try {
             dispatch({ type: actionTypes.FETCH_GENDER_START })
-            const res = await userService.getAllCodeService('gender')
+            const res = await userService.getAllCodeService('GENDER')
             if (res && res.status === 'OK') {
                 dispatch(fetchGenderSuccess(res.data))
             } else {
